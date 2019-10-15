@@ -11,6 +11,21 @@ defmodule Utils.Parse do
     parse_repos(blocks)
   end
 
+  def repo_ext_info_test() do
+    repo_ext_info("https://github.com/rozap/exquery")
+  end
+
+  def repo_ext_info(url) do
+    {:ok, html} = Utils.get_contents(url)
+    datetime = Floki.find(html, "[itemprop='dateModified'] relative-time") |> Floki.attribute("datetime") |> to_string() |> to_datetime()
+    %RepoExtInfo{
+      url: url,
+      stars: Floki.find(html, "a.js-social-count") |> Floki.text() |> String.replace(~r/\n+|\s+/, "") |> String.to_integer(),
+      last_commit: DateTime.to_date(datetime),
+      days_ago: DateTime.diff(DateTime.utc_now(), datetime) / 86400 |> trunc()
+    }
+  end
+
   # Parse repositories
   defp parse_repos(html_tree) do
     for html_subtree <- split_repos(html_tree) do
@@ -42,4 +57,10 @@ defmodule Utils.Parse do
 
   # HTML tree element contents
   defp contents([{_tag, _attrs, content} | _]), do: content
+
+  # Convert datetime
+  defp to_datetime(str) do
+    {:ok, datetime, _} = DateTime.from_iso8601(str)
+    datetime
+  end
 end
