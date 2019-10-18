@@ -1,0 +1,22 @@
+/* This file is for your main application css. */
+a.header-link {
+    font-size: 1.25em;
+    font-weight: 400;
+    text-decoration: none;
+    color: cornflowerblue;
+    margin-right: 20px;
+    line-height: 3em;
+}
+
+a.header-link:hover {
+    color: mediumaquamarine;
+    text-decoration: none;
+}
+
+.checked {
+    color: orange;
+}
+
+.animate {
+    transition: all 125ms linear;
+}

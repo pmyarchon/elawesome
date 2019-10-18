@@ -1,0 +1,61 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="header-link animate" href="/">All</a>
+      
+      <a class="header-link animate" href="/?min_stars=10">
+        ≥10 <span class="fa fa-star checked"></span>
+      </a>
+
+      <a class="header-link animate" href="/?min_stars=50">
+        ≥50 <span class="fa fa-star checked"></span>
+      </a>
+
+      <a class="header-link animate" href="/?min_stars=100">
+        ≥100 <span class="fa fa-star checked"></span>
+      </a>
+
+      <a class="header-link animate" href="/?min_stars=500">
+        ≥500 <span class="fa fa-star checked"></span>
+      </a>
+
+      <a class="header-link animate" href="/?min_stars=1000">
+        ≥1000 <span class="fa fa-star checked"></span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="row">
+  <div class="col-md-12">
+    <p>
+      Elixir is awesome. And it has a vast awesome list: <a href="https://github.com/h4cc/awesome-elixir">h4cc/awesome-elixir</a>.
+      This is a mirror of it where each library is marked with number of
+      stars at <a href="https://github.com">Github</a> and number of days since
+      the last commit.
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Contents</h2>
+
+    <%= for group <- libs(@conn) do %>
+      <a href="<%= group.url %>">
+        <h4><%= group.name %></h4>
+      </a>
+      <h5><%= group.description %></h4>
+      <ul>
+        <%= for repo <- group.items do %>
+          <li>
+            <a href="<%= repo.url %>"><%= repo.name %></a>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-calendar checked"></span>
+            <span>&ndash; <%= raw repo.description %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>

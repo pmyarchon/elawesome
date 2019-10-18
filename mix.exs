@@ -6,6 +6,8 @@ defmodule Elawesome.Mixfile do
       app: :elawesome,
       version: "0.1.0",
       elixir: "~> 1.9",
+      elixirc_paths: elixirc_paths(Mix.env),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers,
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       deps: deps()
@@ -15,31 +17,25 @@ defmodule Elawesome.Mixfile do
   # Configuration for the OTP application
   def application do
     [
-      applications: start_apps(),
-      mod: {Elawesome, []}
+      mod: {Elawesome.Application, []},
+      extra_applications: [:logger, :runtime_tools]
     ]
   end
 
-  # Start applications
-  defp start_apps do
-    [
-      :logger,
-      :ssl,
-      :inets,
-      :cowboy,
-      :plug,
-      :phoenix,
-      :floki
-    ]
-  end
+  # Specifies which paths to compile per environment
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_),     do: ["lib"]
 
   # Dependencies
   defp deps do
     [
-      {:cowboy, "~> 1.1.2"},
-      {:phoenix, "~> 1.4"},
+      {:phoenix, "~> 1.3.4"},
+      {:phoenix_pubsub, "~> 1.0"},
+      {:phoenix_html, "~> 2.10"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:gettext, "~> 0.11"},
+      {:cowboy, "~> 1.0"},
       {:plug_cowboy, "~> 1.0"},
-      {:jason, "~> 1.1"},
       {:floki, "~> 0.23.0"}
     ]
   end

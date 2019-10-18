@@ -1,11 +1,9 @@
 defmodule Elawesome do
-  use Application
-  require Logger
+  @moduledoc """
+  Elawesome keeps the contexts that define your domain
+  and business logic.
 
-  def start(_type, _args) do
-    Logger.debug("Elawesome started...", [])
-    web_port = Application.get_env(:elawesome, :web_port)
-    children = [Plug.Adapters.Cowboy.child_spec(:http, Router, [], port: web_port), Storage]
-    Supervisor.start_link(children, [strategy: :one_for_one, name: Elawesome.Supervisor])
-  end
+  Contexts are also responsible for managing your data, regardless
+  if it comes from the database, an external API or others.
+  """
 end
