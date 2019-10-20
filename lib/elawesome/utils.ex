@@ -5,7 +5,8 @@ defmodule Utils do
 
   def get_contents(url) do
     case :httpc.request(:get, {to_charlist(url), []}, [], [{:body_format, :binary}]) do
-      {:ok, {{_version, 200, _status_text}, _headers, body}} -> {:ok, body}
+      # {:ok, {{_version, 200, _status_text}, _headers, body}} -> {:ok, body}
+      {:ok, {{_version, _, _status_text}, _headers, body}} -> {:ok, body}
       _ -> nil
     end
   end
