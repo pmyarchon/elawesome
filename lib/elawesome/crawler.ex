@@ -120,7 +120,6 @@ defmodule Elawesome.Crawler do
 
     # Output debug message and update counters
     Logger.debug("ETS populated in #{time_us2} us")
-    Elawesome.Storage.set_h4cc_parse_time(time_us2)
     Elawesome.Storage.set_total(num_repos)
 
     # Output debug message and update counters
@@ -136,8 +135,9 @@ defmodule Elawesome.Crawler do
 
     # Output debug message and update counters
     Logger.info("#{num_repos} GitHub repositories checked in #{trunc(time_us3 / 1000000)} s")
-    Elawesome.Storage.set_repos_info_time(time_us3)
+    Elawesome.Storage.set_warm_up(false)
     Elawesome.Storage.set_status(@status_idle)
+    Elawesome.Storage.set_repos_info_time(time_us3)
 
     # Output debug end
     num_processed = Elawesome.Storage.processed()
