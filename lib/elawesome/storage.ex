@@ -77,21 +77,21 @@ defmodule Elawesome.Storage do
   def repo(name), do: lookup(@ets_repos, name, &Repo.from_tuple/1)
 
   def repos() do
-    :ets.foldr(&([Repo.from_tuple(&1) | &2]), [], @ets_repos) |> Enum.sort(&(&1.order <= &2.order))
+    :ets.foldr(&([Repo.from_tuple(&1) | &2]), [], @ets_repos)
   end
-
-  def set_repo(repo), do: :ets.insert(@ets_repos, Repo.to_tuple(repo))
-
-  def delete_repo(name), do: :ets.delete(@ets_repos, name)
 
   def filter_repos(min_stars) do
     repos = :ets.foldr(fn (t, acc) ->
       r = Repo.from_tuple(t)
       if r.stars >= min_stars, do: [r | acc], else: acc
-    end, [], @ets_repo_groups)
+    end, [], @ets_repos)
 
     Enum.sort(repos, &(&1.order <= &2.order))
   end
+
+  def set_repo(repo), do: :ets.insert(@ets_repos, Repo.to_tuple(repo))
+
+  def delete_repo(name), do: :ets.delete(@ets_repos, name)
 
   # GenServer API
   def start_link(state) do
