@@ -48,7 +48,7 @@ defmodule Utils.Parse do
       group = %RepoGroup{
         name: Floki.find(html_subtree, "h2") |> Floki.filter_out("a") |> Floki.text([deep: false]),
         description: Floki.find(html_subtree, "p > em") |> Floki.text([deep: false]),
-        url: Floki.find(html_subtree, "h2 > a") |> Floki.attribute("href"),
+        url: Floki.find(html_subtree, "h2 > a") |> Floki.attribute("href") |> to_string(),
       }
       items = Floki.find(html_subtree, "ul > li") |> Enum.map(&parse_repo/1) |> Enum.filter(&(String.match?(&1.url, ~r/github.com/iu)))
       {group, items}
