@@ -20,3 +20,8 @@ a.header-link:hover {
 .animate {
     transition: all 125ms linear;
 }
+
+li.outdated {
+    color: #ccc;
+    font-size: .8em;
+}

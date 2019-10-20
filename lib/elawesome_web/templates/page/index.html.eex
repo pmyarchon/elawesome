@@ -30,7 +30,7 @@
   <div class="col-md-12">
     <p>
       Elixir is awesome. And it has a vast awesome list: <a href="https://github.com/h4cc/awesome-elixir">h4cc/awesome-elixir</a>.
-      This is a mirror of it where each library is marked with number of
+      This is a mirror of it where each library is marked with number of 
       stars at <a href="https://github.com">Github</a> and number of days since
       the last commit.
     </p>
@@ -41,17 +41,31 @@
   <div class="col-md-12">
     <h2>Contents</h2>
 
-    <%= for group <- libs(@conn) do %>
-      <a href="<%= group.url %>">
-        <h4><%= group.name %></h4>
-      </a>
-      <h5><%= group.description %></h4>
+    <ul>
+      <%= for item <- @items do %>
+        <li>
+          <a href="<%= item.group.url %>">
+            <%= item.group.name %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+
+    <%= for item <- @items do %>
+      <h2 id="<%= to_anchor(item.group.url) %>">
+        <%= item.group.name %>
+      </h2>
+
+      <h5><%= item.group.description %></h4>
+
       <ul>
-        <%= for repo <- group.items do %>
+        <%= for repo <- item.repos do %>
           <li>
             <a href="<%= repo.url %>"><%= repo.name %></a>
             <span class="fa fa-star checked"></span>
+            <span><%= repo.stars %></span>
             <span class="fa fa-calendar checked"></span>
+            <span><%= repo.days_ago %></span>
             <span>&ndash; <%= raw repo.description %></span>
           </li>
         <% end %>
