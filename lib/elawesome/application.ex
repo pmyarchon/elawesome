@@ -5,19 +5,16 @@ defmodule Elawesome.Application do
   def start(_type, _args) do
     import Supervisor.Spec
 
-    # Say hello!
+    # Say hello
     Logger.debug("Elawesome started...", [])
 
-    # Define workers and child supervisors to be supervised
+    # Start supervisor
     children = [
-      # Start the endpoint when the application starts
+      Elawesome.Storage,
+      Elawesome.Crawler,
       supervisor(ElawesomeWeb.Endpoint, []),
-
-      # Start Storage gen_server
-      Storage
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html for other strategies and supported options
     opts = [strategy: :one_for_one, name: Elawesome.Supervisor]
     Supervisor.start_link(children, opts)
   end
