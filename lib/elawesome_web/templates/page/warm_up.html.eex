@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3>Warming up...</h2>
+
+        <h4 class="p-y-1">
+            Update progress:
+
+            <%= if @num_total === 0 do %>
+                0
+            <% else %>
+                <%= Float.ceil(100 * (@num_processed + @num_failed) / @num_total, 1) %>%
+
+                <small class="all-caps m-l-1">
+                    total: <%= @num_total %>,
+                    processed: <%= @num_processed %>,
+                    not found: <%= @num_failed %>
+                </small>
+            <% end %>
+        </h4>
+    </div>
+</div>
+
+<%= if @num_total > 0 do %>
+    <div class="row m-t-1">
+        <div class="col-md-12">
+            <%= render("progress_bar.html", total: @num_total, success: @num_processed, failed: @num_failed) %>
+        </div>
+    </div>
+<% end %>

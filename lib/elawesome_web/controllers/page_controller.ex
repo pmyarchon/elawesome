@@ -6,9 +6,9 @@ defmodule ElawesomeWeb.PageController do
     min_stars = Utils.maybe_int(params["min_stars"], 0)
 
     # Filter repositories
-    status = Elawesome.Storage.status()
+    warm_up = Elawesome.Storage.warm_up?
 
-    items = if status === :idle do
+    items = if not warm_up do
       repos = Elawesome.Storage.filter_repos(min_stars)
       group_keys = Enum.reduce(repos, MapSet.new(), &(MapSet.put(&2, &1.group)))
       Elawesome.Storage.groups()
@@ -20,9 +20,8 @@ defmodule ElawesomeWeb.PageController do
     end
 
     render conn, "index.html",
+      ready: not warm_up,
       min_stars: min_stars,
-      is_warm_up: Elawesome.Storage.warm_up?,
-      status: status,
       num_total: Elawesome.Storage.total,
       num_processed: Elawesome.Storage.processed,
       num_failed: Elawesome.Storage.failed,

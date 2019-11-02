@@ -1,0 +1,8 @@
+<%= if @stars > 0 do %>
+    <a class="header-link animate <%= if @active do "active" end %>" href="/?min_stars=<%= @stars %>">
+        ≥<%= @stars %>
+        <span class="fa fa-star checked"></span>
+    </a>
+<% else %>
+    <a class="header-link animate <%= if @active do "active" end %>" href="/">All</a>
+<% end %>
