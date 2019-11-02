@@ -13,6 +13,10 @@ a.header-link:hover {
     text-decoration: none;
 }
 
+a.header-link.active {
+    color: firebrick;
+}
+
 .checked {
     color: orange;
 }
@@ -25,3 +29,23 @@ li.outdated {
     color: #ccc;
     font-size: .8em;
 }
+
+.all-caps {
+    text-transform: uppercase;
+}
+
+.m-l-1 { margin-left: 1rem; }
+.m-r-1 { margin-right: 1rem; }
+.m-x-1 { margin-left: 1rem; margin-right: 1rem; }
+.m-t-1 { margin-top: 1rem; }
+.m-b-1 { margin-bottom: 1rem; }
+.m-y-1 { margin-top: 1rem; margin-bottom: 1rem; }
+.m-1 { margin: 1rem; }
+
+.p-l-1 { padding-left: 1rem; }
+.p-r-1 { padding-right: 1rem; }
+.p-x-1 { padding-left: 1rem; padding-right: 1rem; }
+.p-t-1 { padding-top: 1rem; }
+.p-b-1 { padding-bottom: 1rem; }
+.p-y-1 { padding-top: 1rem; padding-bottom: 1rem; }
+.p-1 { padding: 1rem; }
