@@ -12,5 +12,11 @@ defmodule Utils do
 
   def maybe_int(nil, default), do: default
   def maybe_int(value, _) when is_integer(value), do: value
-  def maybe_int(value, _) when is_binary(value), do: :erlang.binary_to_integer(value)
+  def maybe_int(value, default) when is_binary(value) do
+    try do
+      :erlang.binary_to_integer(value)
+    rescue
+      _ -> default
+    end
+  end
 end
