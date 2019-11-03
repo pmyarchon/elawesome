@@ -1,0 +1,6 @@
+<a href="<%= @url %>"><%= @title %></a>
+<span class="fa fa-star checked"></span>
+<span><%= @stars %></span>
+<span class="fa fa-calendar checked"></span>
+<span><%= @days_ago %></span>
+<span>&ndash; <%= raw @description %></span>

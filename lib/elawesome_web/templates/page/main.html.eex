@@ -26,16 +26,16 @@
     <div class="col-md-12">
         <h2>Contents</h2>
 
+        <!-- Sections -->
         <ul>
             <%= for item <- @items do %>
                 <li>
-                    <a href="<%= item.group.url %>">
-                        <%= item.group.name %>
-                    </a>
+                    <%= render("repo_group_link.html", url: item.group.url, title: item.group.name) %>
                 </li>
             <% end %>
         </ul>
 
+        <!-- Libraries -->
         <%= for item <- @items do %>
             <h2 id="<%= to_anchor(item.group.url) %>">
                 <%= item.group.name %>
@@ -46,12 +46,7 @@
             <ul>
                 <%= for repo <- item.repos do %>
                     <li>
-                        <a href="<%= repo.url %>"><%= repo.name %></a>
-                        <span class="fa fa-star checked"></span>
-                        <span><%= repo.stars %></span>
-                        <span class="fa fa-calendar checked"></span>
-                        <span><%= repo.days_ago %></span>
-                        <span>&ndash; <%= raw repo.description %></span>
+                        <%= render("repo.html", url: repo.url, title: repo.name, description: repo.description, stars: repo.stars, days_ago: repo.days_ago) %>
                     </li>
                 <% end %>
             </ul>
