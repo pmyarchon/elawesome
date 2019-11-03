@@ -25,9 +25,8 @@ a.header-link.active {
     transition: all 125ms linear;
 }
 
-li.outdated {
-    color: #ccc;
-    font-size: .8em;
+li.outdated * {
+    color: #ccc !important;
 }
 
 .all-caps {

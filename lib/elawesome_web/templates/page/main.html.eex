@@ -45,7 +45,7 @@
 
             <ul>
                 <%= for repo <- item.repos do %>
-                    <li>
+                    <li class="<%= if repo.days_ago > 365 do "outdated" end %>">
                         <%= render("repo.html", url: repo.url, title: repo.name, description: repo.description, stars: repo.stars, days_ago: repo.days_ago) %>
                     </li>
                 <% end %>
