@@ -14,7 +14,6 @@ defmodule ElawesomeWeb.PageController do
       Elawesome.Storage.groups()
         |> Enum.filter(&(MapSet.member?(group_keys, &1.name)))
         |> Enum.map(&(%{group: &1, repos: Enum.filter(repos, fn el -> el.group === &1.name end)}))
-        |> Enum.filter(&(&1[:items] !== []))
     else
       []
     end
